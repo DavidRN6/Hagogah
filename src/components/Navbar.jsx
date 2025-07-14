@@ -3,7 +3,7 @@ import { CookingPot, Search } from "lucide-react";
 
 const Navbar = () => {
   return (
-    <div className="flex p-5 justify-between items-center">
+    <div className="flex p-[1%] justify-between items-center">
       <img src="logo.webp" alt="logo" className="w-[85px]" />
       <ul className="flex gap-5 text-lg">
         <NavLink to="/" className="cursor-pointer">

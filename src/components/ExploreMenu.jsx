@@ -33,7 +33,7 @@ const ExploreMenu = ({ category, setCategory }) => {
         <button
           onClick={scrollLeft}
           className="
-            flex items-center justify-center
+            md:flex hidden items-center justify-center border-2 border-white
             absolute left-0 top-1/2 -translate-y-1/2
             w-10 h-10 rounded-full bg-[#d07635] backdrop-blur
             shadow transition z-10 cursor-pointer"
@@ -48,7 +48,7 @@ const ExploreMenu = ({ category, setCategory }) => {
           className="
             flex flex-row
             justify-start items-center
-            gap-10 px-14
+            gap-10 
             overflow-x-auto overflow-y-hidden
             scrollbar-hide
             scroll-snap-x mandatory snap-mandatory
@@ -83,7 +83,7 @@ const ExploreMenu = ({ category, setCategory }) => {
         <button
           onClick={scrollRight}
           className="
-            flex items-center justify-center
+            md:flex hidden items-center justify-center border-2 border-white
             absolute right-0 top-1/2 -translate-y-1/2
             w-10 h-10 rounded-full bg-[#d07635] backdrop-blur
             shadow transition z-10 cursor-pointer"
