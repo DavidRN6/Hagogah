@@ -17,16 +17,20 @@ const ExploreMenu = ({ category, setCategory }) => {
   };
 
   return (
-    <section id="menu" className="flex flex-col gap-8 mt-8">
+    <section id="menu" className="flex flex-col gap-8 mt-14 lg:mt-20">
       {/* Title */}
-      <header className="text-center">
-        <h1 className="font-medium text-3xl sm:text-5xl md:text-6xl">
-          منيو حجوجة
-        </h1>
+      <div className="text-center">
+        <div className="inline-flex gap-4 items-center mb-1">
+          <p className="w-8 sm:w-12 h-[1px] sm:h-[2px] bg-black"></p>
+          <h1 className="font-medium text-3xl sm:text-5xl md:text-6xl">
+            منيو حجوجة
+          </h1>
+          <p className="w-8 sm:w-12 h-[1px] sm:h-[2px] bg-black"></p>
+        </div>
         <p className="mt-7 text-lg sm:text-xl md:text-2xl">
           استمتع بتناول الطعام البيتي والفلاحي في أجواء رمضان
         </p>
-      </header>
+      </div>
 
       <div className="relative">
         {/* Left Button */}
@@ -38,21 +42,14 @@ const ExploreMenu = ({ category, setCategory }) => {
             w-10 h-10 rounded-full bg-[#d07635] backdrop-blur
             shadow transition z-10 cursor-pointer"
         >
-          <ChevronLeft className="w-6 h-6" />
+          <ChevronLeft className="w-6 h-6 text-white" />
         </button>
 
         {/* القائمة نفسها */}
         <div
           ref={listRef}
           id="menu-list"
-          className="
-            flex flex-row
-            justify-start items-center
-            gap-10 
-            overflow-x-auto overflow-y-hidden
-            scrollbar-hide
-            scroll-snap-x mandatory snap-mandatory
-          "
+          className="flex flex-row justify-start items-center gap-10 overflow-x-auto overflow-y-hidden scrollbar-hide"
         >
           {menu.map((item, index) => (
             <div
@@ -69,7 +66,6 @@ const ExploreMenu = ({ category, setCategory }) => {
                   src={item.menu_image}
                   alt={item.menu_name}
                   className="w-full h-full object-cover cursor-pointer"
-                  draggable="false"
                 />
               </div>
               <p className="mt-2.5 text-base whitespace-nowrap">
@@ -88,12 +84,17 @@ const ExploreMenu = ({ category, setCategory }) => {
             w-10 h-10 rounded-full bg-[#d07635] backdrop-blur
             shadow transition z-10 cursor-pointer"
         >
-          <ChevronRight className="w-6 h-6" />
+          <ChevronRight className="w-6 h-6 text-white" />
         </button>
       </div>
 
       {/* list img */}
-      <img src="list.webp" alt="list" className="w-full mt-1.5" />
+      <img
+        src="list.webp"
+        alt="list"
+        loading="eager"
+        className="w-full mt-1.5 md:h-4 sm:h-3 h-2"
+      />
     </section>
   );
 };
