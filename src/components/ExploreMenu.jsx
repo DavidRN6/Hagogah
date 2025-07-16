@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { menu } from "../assets/assets";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import listImg from "../../public/list.webp";
 
 const ExploreMenu = ({ category, setCategory }) => {
   const listRef = useRef(null);
@@ -17,7 +18,7 @@ const ExploreMenu = ({ category, setCategory }) => {
   };
 
   return (
-    <section id="menu" className="flex flex-col gap-8 mt-14 lg:mt-20">
+    <section id="menu" className="flex flex-col gap-8 mt-4">
       {/* Title */}
       <div className="text-center">
         <div className="inline-flex gap-4 items-center mb-1">
@@ -90,9 +91,8 @@ const ExploreMenu = ({ category, setCategory }) => {
 
       {/* list img */}
       <img
-        src="list.webp"
+        src={listImg}
         alt="list"
-        loading="eager"
         className="w-full mt-1.5 md:h-4 sm:h-3 h-2"
       />
     </section>

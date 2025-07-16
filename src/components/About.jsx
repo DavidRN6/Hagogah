@@ -1,6 +1,8 @@
+import aboutImg from "../../public/about.webp";
+
 const About = () => {
   return (
-    <div className="my-8">
+    <div className="mt-8 mb-14">
       {/* Title */}
       <div className="text-center">
         <div className="inline-flex gap-4 items-center mb-1">
@@ -16,7 +18,12 @@ const About = () => {
       </div>
 
       <div className="flex justify-between items-center gap-14 mt-10 xl:flex-row flex-col-reverse">
-        <img src="about.webp" alt="about-pic" className="w-[600px]" />
+        <img
+          src={aboutImg}
+          alt="/frontend/public/about.webp"
+          loading="lazy"
+          className="w-[600px]"
+        />
         <div className="flex flex-col gap-5 text-end text-gray-600">
           <p>
             نحن هنا لنأخذكم في رحلة ممتعة وشهية في عالم الطعام الأصيل والمبتكر.
@@ -37,9 +44,18 @@ const About = () => {
           <p>: الطريقة للحجز عبر الموقع الإلكتروني</p>
           <div className="flex flex-col gap-3 mr-3">
             <p>اختر الأيام المتاحة: تحقق من التواريخ المتاحة للحجز</p>
-            <p>أضف عناصر القائمة: أضف العناصر المفضلة لديك، بما في ذلك الأطباق الخاصة والمشروبات</p>
-            <p>ادفع عبر الإنترنت: انتقل إلى الخروج وادفع المبلغ الكامل لتأمين حجزك</p>
-            <p>استمتع بتجربة فريدة: استمتع بتجربة تناول الطعام المميزة مع عائلتك وأصدقائك</p>
+            <p>
+              أضف عناصر القائمة: أضف العناصر المفضلة لديك، بما في ذلك الأطباق
+              الخاصة والمشروبات
+            </p>
+            <p>
+              ادفع عبر الإنترنت: انتقل إلى الخروج وادفع المبلغ الكامل لتأمين
+              حجزك
+            </p>
+            <p>
+              استمتع بتجربة فريدة: استمتع بتجربة تناول الطعام المميزة مع عائلتك
+              وأصدقائك
+            </p>
           </div>
         </div>
       </div>

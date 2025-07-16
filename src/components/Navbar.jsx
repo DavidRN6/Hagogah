@@ -1,28 +1,93 @@
-import { ChevronLeft, CookingPot, Search } from "lucide-react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FiMenu } from "react-icons/fi";
+import { HiOutlineSearch } from "react-icons/hi";
+import { GiMeal } from "react-icons/gi";
+import { IoIosArrowBack } from "react-icons/io";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { StoreContext } from "../context/StoreContext";
+import { FaUser } from "react-icons/fa6";
 
-const Navbar = () => {
+const Navbar = ({ setShowLogin }) => {
   const [visible, setVisible] = useState(false);
+
+  const { getTotalCartAmount, setShowSearch } = useContext(StoreContext);
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  //=====================
+  // To Show Search bar
+  //=====================
+  const handleSearchClick = () => {
+    if (location.pathname !== "/menu") {
+      navigate("/menu");
+      setTimeout(() => {
+        setShowSearch(true);
+      }, 600);
+    } else {
+      setTimeout(() => {
+        setShowSearch(true);
+      }, 0);
+    }
+  };
+
+  // هل المستخدم مسجل ام لا
+  const currentUser = JSON.parse(localStorage.getItem("currentUser") || "null");
 
   return (
     <div className="flex p-[1%] justify-between items-center">
-      <img src="logo.webp" alt="logo" className="w-[85px]" />
-      {/* Menu For large Screen */}
+      {/*=======
+        logo
+      ==========*/}
+      <Link to="/">
+        <img src="logo.webp" alt="logo" className="w-[70px] sm:w-[85px]" />
+      </Link>
+      {/*========================
+        Menu For large Screen
+      ==========================*/}
       <ul className="hidden md:flex gap-5 text-xl">
-        <li className="cursor-pointer">الرئيسية</li>
-        <li className="cursor-pointer">عن حجوجة</li>
-        <li className="cursor-pointer">منيو حجوجة</li>
+        <Link to="/" className="cursor-pointer">
+          الرئيسية
+        </Link>
+        <Link to="/menu" className="cursor-pointer">
+          منيو حجوجة
+        </Link>
       </ul>
-      <div className="flex items-center gap-8 md:gap-10">
-        <Search className="cursor-pointer w-8 h-8" />
+      {/*===============
+        Icons & Button
+      ==================*/}
+      <div className="flex items-center gap-5 md:gap-8">
+        <HiOutlineSearch
+          onClick={handleSearchClick}
+          className="cursor-pointer text-3xl"
+        />
         <div className="relative">
-          <CookingPot className="cursor-pointer w-7 h-7" />
-          <div className="absolute min-w-2.5 min-h-2.5 bg-[#d07635] rounded-md -top-2 -right-2"></div>
+          <Link to="/cart">
+            <GiMeal className="cursor-pointer text-3xl" />
+          </Link>
+          <div
+            className={
+              getTotalCartAmount() === 0
+                ? ""
+                : "absolute min-w-2.5 min-h-2.5 bg-[#d07635] rounded-md -top-2 -right-2"
+            }
+          ></div>
         </div>
-        <button className="cursor-pointer hidden md:flex bg-[#d07635] text-white py-2.5 px-[30px] rounded-md hover:bg-amber-700 transition duration-300">
-          تسجيل الدخول
-        </button>
+        {/* لو المستخدم عمل تسجيل دخول تظهر الايكون */}
+        {!currentUser ? (
+          <button
+            onClick={() => setShowLogin(true)}
+            className="cursor-pointer hidden md:flex bg-[#d07635] text-white py-2.5 px-[30px] rounded-md hover:bg-amber-700 transition duration-300"
+          >
+            تسجيل الدخول
+          </button>
+        ) : (
+          <Link to="/orders">
+            <FaUser className="text-2xl cursor-pointer hidden md:flex" />
+          </Link>
+        )}
+
+        {/* Menu icon for small screen */}
         <span
           onClick={() => setVisible(true)}
           className="md:hidden cursor-pointer text-4xl"
@@ -30,6 +95,10 @@ const Navbar = () => {
           <FiMenu />
         </span>
       </div>
+
+      {/*========================
+        menu for small screen
+      ==========================*/}
       <div
         className={`absolute top-0 right-0 bottom-0 z-10 overflow-hidden bg-white transition-all ${
           visible ? `w-[300px]` : `w-0`
@@ -41,31 +110,37 @@ const Navbar = () => {
             className="flex items-center gap-4 p-3 cursor-pointer"
           >
             <span className="h-4 items-center">
-              <ChevronLeft />
+              <IoIosArrowBack />
             </span>
             <p>رجوع</p>
           </div>
 
           <ul className="flex flex-col gap-5 items-center justify-center mt-6">
-            <li>
+            <Link to="/" onClick={() => setVisible(false)}>
               <button className="cursor-pointer bg-white border-2 border-[#d07635] text-[#d07635] py-2.5 px-[30px] rounded-md hover:bg-[#d07635] hover:text-white transition duration-200">
                 الرئيسية
               </button>
-            </li>
-            <li>
-              <button className="cursor-pointer bg-white border-2 border-[#d07635] text-[#d07635] py-2.5 px-[30px] rounded-md hover:bg-[#d07635] hover:text-white transition duration-200">
-                عن حجوجة
-              </button>
-            </li>
-            <li>
+            </Link>
+            <Link to="/menu" onClick={() => setVisible(false)}>
               <button className="cursor-pointer bg-white border-2 border-[#d07635] text-[#d07635] py-2.5 px-[30px] rounded-md hover:bg-[#d07635] hover:text-white transition duration-200">
                 منيو حجوجة
               </button>
-            </li>
+            </Link>
 
-            <button className="cursor-pointer flex bg-[#d07635] text-white py-2.5 px-[30px] mt-5 rounded-md hover:bg-amber-700 transition duration-300">
-              تسجيل الدخول
-            </button>
+            {!currentUser ? (
+              <button
+                onClick={() => setVisible(false)}
+                className="cursor-pointer flex bg-[#d07635] text-white py-2.5 px-[30px] mt-5 rounded-md hover:bg-amber-700 transition duration-300"
+              >
+                تسجيل الدخول
+              </button>
+            ) : (
+              <Link to="/orders" onClick={() => setVisible(false)}>
+                <button className="cursor-pointer flex bg-[#d07635] text-white py-2.5 px-[30px] mt-5 rounded-md hover:bg-amber-700 transition duration-300">
+                  الاوردرات
+                </button>
+              </Link>
+            )}
           </ul>
         </div>
       </div>
