@@ -40,7 +40,7 @@ const Navbar = ({ setShowLogin }) => {
         logo
       ==========*/}
       <Link to="/">
-        <img src="logo.webp" alt="logo" className="w-[70px] sm:w-[85px]" />
+        <img src="logo.webp" alt="logo" className="w-[70px] sm:w-[85px]" loading="lazy" />
       </Link>
       {/*========================
         Menu For large Screen

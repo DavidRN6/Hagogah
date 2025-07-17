@@ -66,6 +66,7 @@ const ExploreMenu = ({ category, setCategory }) => {
                 <img
                   src={item.menu_image}
                   alt={item.menu_name}
+                  loading="lazy"
                   className="w-full h-full object-cover cursor-pointer"
                 />
               </div>

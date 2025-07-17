@@ -23,6 +23,7 @@ const FoodItem = ({ id, name, price, image }) => {
             <img
               onClick={() => removeFromCart(id)}
               src={removeIcon}
+              loading="lazy"
               alt="remove-icon"
               className="cursor-pointer md:w-8 w-7"
             />
