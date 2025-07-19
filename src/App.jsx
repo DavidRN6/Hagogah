@@ -11,6 +11,7 @@ import Orders from "./pages/Orders";
 import PageTransitionWrapper from "./animations/PageTransitionWrapper";
 import { AnimatePresence } from "motion/react";
 import SearchBar from "./components/SearchBar";
+import ScrollToTopButton from "./animations/ScrollToTopButton";
 
 const App = () => {
   const [showLogin, setShowLogin] = useState(false);
@@ -67,6 +68,7 @@ const App = () => {
           </Routes>
         </AnimatePresence>
       </div>
+      <ScrollToTopButton />
       <Footer />
     </>
   );
