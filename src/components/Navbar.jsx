@@ -34,13 +34,25 @@ const Navbar = ({ setShowLogin }) => {
   // هل المستخدم مسجل ام لا
   const currentUser = JSON.parse(localStorage.getItem("currentUser") || "null");
 
+  // تسجيل الخروج
+  const handleLogout = () => {
+    localStorage.removeItem("currentUser");
+    navigate("/"); // يرجع للهوم
+    window.location.reload(); // يعمل تحديث علشان يشيل بيانات المستخدم من الواجهة
+  };
+
   return (
     <div className="flex p-[1%] justify-between items-center">
       {/*=======
         logo
       ==========*/}
       <Link to="/">
-        <img src="logo.webp" alt="logo" className="w-[70px] sm:w-[85px]" loading="lazy" />
+        <img
+          src="logo.webp"
+          alt="logo"
+          className="w-[70px] sm:w-[85px]"
+          loading="lazy"
+        />
       </Link>
       {/*========================
         Menu For large Screen
@@ -82,9 +94,17 @@ const Navbar = ({ setShowLogin }) => {
             تسجيل الدخول
           </button>
         ) : (
-          <Link to="/orders">
-            <FaUser className="text-2xl cursor-pointer hidden md:flex" />
-          </Link>
+          <div className="hidden md:flex items-center gap-4">
+            <Link to="/orders">
+              <FaUser className="text-2xl cursor-pointer" />
+            </Link>
+            <button
+              onClick={handleLogout}
+              className="cursor-pointer bg-red-600 text-white py-2 px-4 rounded-md hover:bg-red-700 transition duration-300"
+            >
+              تسجيل الخروج
+            </button>
+          </div>
         )}
 
         {/* Menu icon for small screen */}
@@ -129,17 +149,25 @@ const Navbar = ({ setShowLogin }) => {
 
             {!currentUser ? (
               <button
-                onClick={() => setVisible(false)}
+                onClick={() => setShowLogin(true)}
                 className="cursor-pointer flex bg-[#d07635] text-white py-2.5 px-[30px] mt-5 rounded-md hover:bg-amber-700 transition duration-300"
               >
                 تسجيل الدخول
               </button>
             ) : (
-              <Link to="/orders" onClick={() => setVisible(false)}>
-                <button className="cursor-pointer flex bg-[#d07635] text-white py-2.5 px-[30px] mt-5 rounded-md hover:bg-amber-700 transition duration-300">
-                  الاوردرات
+              <>
+                <Link to="/orders" onClick={() => setVisible(false)}>
+                  <button className="cursor-pointer flex bg-[#d07635] text-white py-2.5 px-[30px] mt-5 rounded-md hover:bg-amber-700 transition duration-300">
+                    الاوردرات
+                  </button>
+                </Link>
+                <button
+                  onClick={handleLogout}
+                  className="cursor-pointer flex bg-red-600 text-white py-2.5 px-[30px] mt-5 rounded-md hover:bg-red-700 transition duration-300"
+                >
+                  تسجيل الخروج
                 </button>
-              </Link>
+              </>
             )}
           </ul>
         </div>
